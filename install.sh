@@ -57,9 +57,9 @@ install_jq() {
 #Check user token
 check_token() {
   echo -e "                                                       "
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]               LICENSY GARAXYZ - ASSISTEN         [+]${NC}"
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
+  echo -e "${RED}[+] =============================================== [+]${NC}"
+  echo -e "${BLUE}[+]             LICENSY GARAXYZ - ASSISTEN          [+]${NC}"
+  echo -e "${RED}[+] =============================================== [+]${NC}"
   echo -e "                                                       "
   echo -e "${YELLOW}MASUKAN AKSES TOKEN :${NC}"
   read -r USER_TOKEN
