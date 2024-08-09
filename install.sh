@@ -692,7 +692,7 @@ switchssl(){
 switchdomains(){
     echo -e ""
     echo -e "${BLUE}[+] =================== [+]${NC}"
-    echo -e "${RED}[!]     Change domains.      [+]${NC}"
+    echo -e "${RED}[!]     Change domains.  [+]${NC}"
     echo -e "${BLUE}[+] =================== [+]${NC}"
     echo -e "Please enter the domain (panel.mydomain.ltd) you want to switch to."
     read -r DOMAINSWITCH
