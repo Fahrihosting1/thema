@@ -11,10 +11,10 @@ NC='\033[0m'
 display_welcome() {
   echo -e ""
   echo -e "${RED}[+] =============================================== [+]${NC}"
-  echo -e "${RED}[+]                                                       [+]${NC}"
+  echo -e "${RED}[+]                                                 [+]${NC}"
   echo -e "${RED}[+]                AUTO INSTALLER THEMA             [+]${NC}"
-  echo -e "${RED}[+]                  © VALLZ OFFC                      [+]${NC}"
-  echo -e "${RED}[+]                                                       [+]${NC}"
+  echo -e "${RED}[+]                  © VALLZ OFFC                   [+]${NC}"
+  echo -e "${RED}[+]                                                 [+]${NC}"
   echo -e "${RED}[+] =============================================== [+]${NC}"
   echo -e ""
   echo -e "script ini di buat untuk mempermudah penginstalasian thema pterodactyle,"
