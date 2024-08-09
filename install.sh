@@ -738,7 +738,7 @@ while true; do
   echo -e "${BLUE}[+]                   SELECT OPTION                 [+]${NC}"
   echo -e "${BLUE}[+] =============================================== [+]${NC}"
   echo -e "                                                       "
-  echo -e "SELECT OPTION :"
+  echo -e "${RED}SELECT OPTION MENU :${NC}"
   echo "1. Install theme"
   echo "2. Uninstall theme"
   echo "3. Configure Wings"
