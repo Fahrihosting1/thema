@@ -13,7 +13,7 @@ display_welcome() {
   echo -e "${RED}[+] =============================================== [+]${NC}"
   echo -e "${RED}[+]                                                 [+]${NC}"
   echo -e "${RED}[+]                AUTO INSTALLER THEMA             [+]${NC}"
-  echo -e "${RED}[+]                  © GARAXYZ - ASSISTEN           [+]${NC}"
+  echo -e "${RED}[+]                © GARAXYZ - ASSISTEN             [+]${NC}"
   echo -e "${RED}[+]                                                 [+]${NC}"
   echo -e "${RED}[+] =============================================== [+]${NC}"
   echo -e ""
