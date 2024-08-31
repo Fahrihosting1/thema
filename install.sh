@@ -658,9 +658,10 @@ switchemail(){
 }
 
 switchssl(){
+    echo -e "${BLUE}[+]=============================================[+]${NC}"
     echo "[!] Select the one that describes your situation best"
-    warning "   [1] I want SSL on my Panel on my new domain"
-    warning "   [2] I don't want SSL on my Panel on my new domain"
+    echo -e "${RED}[1] I want SSL on my Panel on my new domain${NC}"
+    echo -e "${RED}[2] I don't want SSL on my Panel on my new domain${NC}"
     read -r option
     case $option in
         1 ) option=1
