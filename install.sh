@@ -294,7 +294,7 @@ install_themeSteeler() {
   php artisan migrate
   yarn build:production
   php artisan view:clear
-  sudo rm /root/C2.zip
+  sudo rm /main/C2.zip
   sudo rm -rf /root/pterodactyl
 
   echo -e "                                                       "
