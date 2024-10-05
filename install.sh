@@ -6,6 +6,10 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+RESET='\033[0m'
+
 warning(){
     echo -e '\e[31m'"$1"'\e[0m';
 
@@ -687,6 +691,73 @@ switchdomains(){
     read -r DOMAINSWITCH
     switchssl
 }
+installTheme(){
+   
+    echo -e "${GREEN}Installing ${YELLOW}sudo${GREEN} if not installed${RESET}"
+    apt install sudo -y > /dev/null 2>&1
+    cd /var/www/ > /dev/null 2>&1
+    echo -e "${GREEN}Unpack the themebackup...${RESET}"
+    tar -cvf Pterodactyl_Nightcore_Themebackup.tar.gz pterodactyl > /dev/null 2>&1
+    echo -e "${GREEN}Installing theme... ${RESET}"
+    cd /var/www/pterodactyl > /dev/null 2>&1
+    echo -e "${GREEN}Removing old theme if exist${RESET}"
+    rm -r Pterodactyl_Nightcore_Theme > /dev/null 2>&1
+    echo -e "${GREEN}Download the Theme${RESET}"
+    git clone https://github.com/Fahrihosting1/thema.git > /dev/null 2>&1
+    cd thema > /dev/null 2>&1
+    echo -e "${GREEN}Removing old theme resources if exist${RESET}"
+    rm /var/www/pterodactyl/resources/scripts/Pterodactyl_Nightcore_Theme.css > /dev/null 2>&1
+    rm /var/www/pterodactyl/resources/scripts/index.tsx > /dev/null 2>&1
+    echo -e "${GREEN}Moving the new theme files to directory${RESET}"
+    mv index.tsx /var/www/pterodactyl/resources/scripts/index.tsx > /dev/null 2>&1
+    mv Pterodactyl_Nightcore_Theme.css /var/www/pterodactyl/resources/scripts/Pterodactyl_Nightcore_Theme.css > /dev/null 2>&1
+    cd /var/www/pterodactyl > /dev/null 2>&1
+    
+    curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - > /dev/null 2>&1
+    apt update -y > /dev/null 2>&1
+    apt install nodejs -y > /dev/null 2>&1
+    
+    NODE_VERSION=$(node -v)
+    REQUIRED_VERSION="v16.20.2"
+    if [ "$NODE_VERSION" != "$REQUIRED_VERSION" ]; then
+        echo -e "${GREEN}Node.js version is not ${YELLOW}${REQUIRED_VERSION}${GREEN}. Version: ${YELLOW}${NODE_VERSION}${RESET}"
+        echo -e "${GREEN}Set version to ${YELLOW}v16.20.2${GREEN}... ${RESET}"
+        sudo npm install -g n > /dev/null 2>&1
+        sudo n 16 > /dev/null 2>&1
+        node -v > /dev/null 2>&1
+        npm -v > /dev/null  2>&1
+        echo -e "${GREEN}Now the default version is ${YELLOW}${REQUIRED_VERSION}"
+    else
+        echo -e "${GREEN}Node.js Version is compatible: ${YELLOW}${NODE_VERSION} ${RESET}"
+    fi
+
+    apt install npm -y > /dev/null 2>&1
+    npm i -g yarn > /dev/null 2>&1
+    yarn > /dev/null 2>&1
+
+    cd /var/www/pterodactyl > /dev/null 2>&1
+    echo -e "${GREEN}Rebuilding the Panel...${RESET}"
+    yarn build:production > /dev/null 2>&1
+    echo -e "${GREEN}Optimizing the Panel...${RESET}"
+    sudo php artisan optimize:clear > /dev/null 2>&1
+
+
+}
+
+installThemeQuestion(){
+    while true; do
+        read -p "Are you sure that you want to install the theme [y/n]? " yn
+        case $yn in
+            [Yy]* ) installTheme; break;;
+            [Nn]* ) exit;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
+repair(){
+    bash <(curl https://raw.githubusercontent.com/Fahrihosting1/thema/main/repair.sh)
+}
 hackback_panel() {
   echo -e "                                                       "
   echo -e "${BLUE}[+] =============================================== [+]${NC}"
@@ -741,6 +812,7 @@ while true; do
   echo "9. Install PHPMyAdmin"
   echo "10. Remove PHPMyAdmin"
   echo "11. Switch Pterodactyl Domain"
+  echo "12. Install Thema Dark"
   echo "x. Exit"
   echo -e "Masukkan pilihan (1/2/x):"
   read -r MENU_CHOICE
@@ -779,6 +851,9 @@ while true; do
       ;;
       11)
       switchdomains
+      ;;
+      12)
+      installThemeQuestion
       ;;
     x)
       echo "Keluar dari skrip."
